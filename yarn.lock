@@ -141,6 +141,13 @@
   dependencies:
     ckeditor5 "^29.2.0"
 
+"@ckeditor/ckeditor5-font@^29.2.0":
+  version "29.2.0"
+  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-font/-/ckeditor5-font-29.2.0.tgz#1f73a0437fb8bd488a5d08e0ad3cf3cc1775d498"
+  integrity sha512-jN+kyOR3V1TRdglHeRhuNDipRlZyS7cFP8XL1qenfah7OLYZEntw6G/xiHTaR3QnG8nS6bRPMYp0XPMAJVT5QA==
+  dependencies:
+    ckeditor5 "^29.2.0"
+
 "@ckeditor/ckeditor5-heading@^29.2.0":
   version "29.2.0"
   resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-heading/-/ckeditor5-heading-29.2.0.tgz#7db87ec874e637017aaf822ff75c8834d8506150"
@@ -194,6 +201,13 @@
   integrity sha512-OijakFLlP90xKF4fAzdrsWpBAVyNz1DwWXr1NqKviAjaYMLJiRk4DUGxXDDUzXCPfcJx1d+jY9CcYlRWK7eS+A==
   dependencies:
     "@ckeditor/ckeditor5-ui" "^29.2.0"
+    ckeditor5 "^29.2.0"
+
+"@ckeditor/ckeditor5-page-break@^29.2.0":
+  version "29.2.0"
+  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-page-break/-/ckeditor5-page-break-29.2.0.tgz#ca9f9be957f89bbaaa52d75e0dab42d690f3ee57"
+  integrity sha512-DDSbM+lXfQT1VP5CR9IuDN0xFuuancQdf0+NNOEDMJy1zfiwDkRvEGZY/HHVRb/W1QYZkEwnNmG+lv8I5Zk4/g==
+  dependencies:
     ckeditor5 "^29.2.0"
 
 "@ckeditor/ckeditor5-paragraph@^29.2.0":

@@ -30,13 +30,18 @@ import Table from "@ckeditor/ckeditor5-table/src/table";
 import TableToolbar from "@ckeditor/ckeditor5-table/src/tabletoolbar";
 import TextTransformation from "@ckeditor/ckeditor5-typing/src/texttransformation";
 import CloudServices from "@ckeditor/ckeditor5-cloud-services/src/cloudservices";
+//Added Plugins
 import InsertAudio from "./InsertAudio";
 import GeneralHtmlSupport from "@ckeditor/ckeditor5-html-support/src/generalhtmlsupport";
+import Font from "@ckeditor/ckeditor5-font/src/font";
+import ImageResize from "@ckeditor/ckeditor5-image/src/imageresize";
+import TableProperties from "@ckeditor/ckeditor5-table/src/tableproperties";
+import TableCellProperties from "@ckeditor/ckeditor5-table/src/tablecellproperties";
+import PageBreak from "@ckeditor/ckeditor5-page-break/src/pagebreak";
+import Base64uploadadapter from "@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter";
 export default class ClassicEditor extends ClassicEditorBase {}
 
-// Plugins to include in the build.
 ClassicEditor.builtinPlugins = [
-  GeneralHtmlSupport,
   Essentials,
   UploadAdapter,
   Autoformat,
@@ -61,33 +66,49 @@ ClassicEditor.builtinPlugins = [
   Table,
   TableToolbar,
   TextTransformation,
+  Base64uploadadapter,
   InsertAudio,
+  GeneralHtmlSupport,
+  Font,
+  ImageResize,
+  TableProperties,
+  TableCellProperties,
+  TableProperties,
+  TableCellProperties,
+  PageBreak,
 ];
 
-// Editor configuration.
 ClassicEditor.defaultConfig = {
   toolbar: {
     items: [
       "heading",
       "|",
+      "undo",
+      "redo",
+      "|",
       "bold",
       "italic",
+      "fontSize",
+      "fontFamily",
+      "fontColor",
+      "fontBackgroundColor",
+      "|",
       "link",
-      "bulletedList",
-      "numberedList",
+      "insertTable",
+      "uploadImage",
+      "mediaEmbed",
+      "insertAudio",
       "|",
       "outdent",
       "indent",
       "|",
-      "uploadImage",
       "blockQuote",
-      "insertTable",
-      "mediaEmbed",
-      "undo",
-      "redo",
-      "insertAudio",
+      "pageBreak",
+      "bulletedList",
+      "numberedList",
     ],
   },
+
   image: {
     toolbar: [
       "imageStyle:inline",
@@ -98,11 +119,18 @@ ClassicEditor.defaultConfig = {
       "imageTextAlternative",
     ],
   },
+
   table: {
-    contentToolbar: ["tableColumn", "tableRow", "mergeTableCells"],
+    contentToolbar: [
+      "tableColumn",
+      "tableRow",
+      "mergeTableCells",
+      "tableProperties",
+      "tableCellProperties",
+    ],
   },
-  // This value must be kept in sync with the language defined in webpack.config.js.
-  language: "en",
+
+  language: "tr",
   htmlSupport: {
     allow: [
       {
