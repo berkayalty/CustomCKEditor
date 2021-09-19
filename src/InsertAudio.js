@@ -36,7 +36,7 @@ class InsertAudio extends Plugin {
               const content = `
               <div class="audioContainer" id=${sha1}>
                 <audio controls></audio><br/>
-              </div><br/>`;
+              </div>`;
               const viewFragment = editor.data.processor.toView(content);
               const modelFragment = editor.data.toModel(viewFragment);
               editor.model.insertContent(modelFragment);
