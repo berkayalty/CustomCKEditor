@@ -31,12 +31,8 @@ class InsertAudio extends Plugin {
               },
             })
             .then((fileResponse) => {
-              console.log("fileResponse ->", fileResponse);
               var sha1 = fileResponse.data.data.dosyaSHA1;
-              const content = `
-              <div class="audioContainer" id=${sha1}>
-                <audio controls></audio><br/>
-              </div><br/>`;
+              const content = `<audio controls id=${sha1}></audio><br/>`;
               const viewFragment = editor.data.processor.toView(content);
               const modelFragment = editor.data.toModel(viewFragment);
               editor.model.insertContent(modelFragment);
