@@ -1,6 +1,7 @@
 import Plugin from "@ckeditor/ckeditor5-core/src/plugin";
 import ButtonView from "@ckeditor/ckeditor5-ui/src/button/buttonview";
 import AudioIcon from "./volumeHigh.svg";
+import axios from "axios";
 class InsertAudio extends Plugin {
   init() {
     const editor = this.editor;
@@ -17,23 +18,31 @@ class InsertAudio extends Plugin {
         fileSelector.setAttribute("type", "file");
         fileSelector.setAttribute("accept", "audio/*");
         fileSelector.click();
-        fileSelector.onchange = function () {
-          var files = this.files;
-          const file = files[0];
-          new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = (error) => reject(error);
-          }).then((res) => {
-            const content = `<audio controls id="audioContainer" src=${res}></audio><br/>`;
-            const viewFragment = editor.data.processor.toView(content);
-            const modelFragment = editor.data.toModel(viewFragment);
-            editor.model.insertContent(modelFragment);
-          });
+        fileSelector.onchange = function (event) {
+          var file = event.target.files[0];
+          let formData = new FormData();
+          formData.append("baslik", "ckeditorSes");
+          formData.append("aciklama", "ckeditorSes");
+          formData.append("dosya", file);
+          axios
+            .post("https://apidev.examy.net/sinav/api/file", formData, {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            })
+            .then((fileResponse) => {
+              console.log("fileResponse ->", fileResponse);
+              var sha1 = fileResponse.data.data.dosyaSHA1;
+              const content = `
+              <div class="audioContainer" id=${sha1}>
+                <audio controls></audio><br/>
+              </div><br/>`;
+              const viewFragment = editor.data.processor.toView(content);
+              const modelFragment = editor.data.toModel(viewFragment);
+              editor.model.insertContent(modelFragment);
+            });
         };
       });
-
       return buttonView;
     });
   }

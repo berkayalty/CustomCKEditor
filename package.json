@@ -48,7 +48,8 @@
     "@ckeditor/ckeditor5-paste-from-office": "^29.2.0",
     "@ckeditor/ckeditor5-table": "^29.2.0",
     "@ckeditor/ckeditor5-typing": "^29.2.0",
-    "@ckeditor/ckeditor5-upload": "^29.2.0"
+    "@ckeditor/ckeditor5-upload": "^29.2.0",
+    "axios": "^0.21.4"
   },
   "devDependencies": {
     "@ckeditor/ckeditor5-core": "^29.2.0",
