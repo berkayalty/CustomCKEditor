@@ -39,6 +39,7 @@ import TableProperties from "@ckeditor/ckeditor5-table/src/tableproperties";
 import TableCellProperties from "@ckeditor/ckeditor5-table/src/tablecellproperties";
 import PageBreak from "@ckeditor/ckeditor5-page-break/src/pagebreak";
 import Base64uploadadapter from "@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter";
+import Notification from "@ckeditor/ckeditor5-ui/src/notification/notification";
 export default class ClassicEditor extends ClassicEditorBase {}
 
 ClassicEditor.builtinPlugins = [
@@ -76,6 +77,7 @@ ClassicEditor.builtinPlugins = [
   TableProperties,
   TableCellProperties,
   PageBreak,
+  Notification,
 ];
 
 ClassicEditor.defaultConfig = {

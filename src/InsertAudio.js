@@ -19,11 +19,16 @@ class InsertAudio extends Plugin {
         fileSelector.setAttribute("accept", "audio/*");
         fileSelector.click();
         fileSelector.onchange = function (event) {
+          var audioId = Math.random().toString(16).slice(2);
           var file = event.target.files[0];
           let formData = new FormData();
-          formData.append("baslik", "ckeditorSes");
-          formData.append("aciklama", "ckeditorSes");
+          formData.append("baslik", "ckeditorSesWitId");
+          formData.append("aciklama", audioId);
           formData.append("dosya", file);
+          const content = `<audio controls id=${audioId} preload="none"></audio><br/>`;
+          const viewFragment = editor.data.processor.toView(content);
+          const modelFragment = editor.data.toModel(viewFragment);
+          editor.model.insertContent(modelFragment);
           axios
             .post("https://apidev.examy.net/sinav/api/file", formData, {
               headers: {
@@ -31,12 +36,21 @@ class InsertAudio extends Plugin {
               },
             })
             .then((fileResponse) => {
-              var sha1 = fileResponse.data.data.dosyaSHA1;
-              const content = `<audio controls id=${sha1}></audio><br/>`;
-              const viewFragment = editor.data.processor.toView(content);
-              const modelFragment = editor.data.toModel(viewFragment);
-              editor.model.insertContent(modelFragment);
-            });
+              if (fileResponse.data.status !== "ERROR") {
+                var sha1 = fileResponse.data.data.dosyaSHA1;
+                axios
+                  .get(
+                    `https://apidev.examy.net/sinav/api/file/presignedURL/${sha1}`
+                  )
+                  .then((response) => {
+                    var s3URL = response.data.data;
+                    document.getElementById(audioId).src = s3URL;
+                  })
+                  .catch((err) => {});
+              } else {
+              }
+            })
+            .catch((err) => {});
         };
       });
       return buttonView;

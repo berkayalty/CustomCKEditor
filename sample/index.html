@@ -18,25 +18,9 @@
 <div id="editor">
 	<h2>Sample</h2>
 </div>
-<div class="divId">
-	<audio controls src="berkay123123123"></audio>
-</div>
-<button onclick="setSrc()"> SET SRC</button>
-<script>
-	function setSrc(){
-		var audios = document.getElementsByTagName("audio");
-		console.log('asd ->',audios[0].src);
-	}
-	// function addButton(){
-	// 	var div = document.getElementsByClassName('divId');
-	// 	var button = document.createElement("button");
-	// 	button.style="float:left"
-	// 	button.innerHTML="Sesi yükle"
-	// 	button.onclick=setSrc;
-	// 	div[0].appendChild(button);
-	// }
-	// addButton();
-</script>
+<div id="divId"></div>
+
+
 <script src="../build/ckeditor.js"></script>
 <script>
 	ClassicEditor.create( document.querySelector( '#editor' ) )
