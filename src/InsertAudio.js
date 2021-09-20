@@ -25,10 +25,6 @@ class InsertAudio extends Plugin {
           formData.append("baslik", "ckeditorSesWitId");
           formData.append("aciklama", audioId);
           formData.append("dosya", file);
-          const content = `<audio controls id=${audioId} preload="none"></audio><br/>`;
-          const viewFragment = editor.data.processor.toView(content);
-          const modelFragment = editor.data.toModel(viewFragment);
-          editor.model.insertContent(modelFragment);
           axios
             .post("https://apidev.examy.net/sinav/api/file", formData, {
               headers: {
@@ -44,7 +40,10 @@ class InsertAudio extends Plugin {
                   )
                   .then((response) => {
                     var s3URL = response.data.data;
-                    document.getElementById(audioId).src = s3URL;
+                    const content = `<audio controls id=${audioId} src=${s3URL} preload="none"></audio><br/>`;
+                    const viewFragment = editor.data.processor.toView(content);
+                    const modelFragment = editor.data.toModel(viewFragment);
+                    editor.model.insertContent(modelFragment);
                   })
                   .catch((err) => {});
               } else {
