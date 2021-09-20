@@ -26,7 +26,7 @@ class InsertAudio extends Plugin {
           formData.append("aciklama", audioId);
           formData.append("dosya", file);
           axios
-            .post("https://apidev.examy.net/sinav/api/file", formData, {
+            .post(`${process.env.REACT_APP_API}api/file`, formData, {
               headers: {
                 "Content-Type": "multipart/form-data",
               },
@@ -36,7 +36,7 @@ class InsertAudio extends Plugin {
                 var sha1 = fileResponse.data.data.dosyaSHA1;
                 axios
                   .get(
-                    `https://apidev.examy.net/sinav/api/file/presignedURL/${sha1}`
+                    `${process.env.REACT_APP_API}api/file/presignedURL/${sha1}`
                   )
                   .then((response) => {
                     var s3URL = response.data.data;
