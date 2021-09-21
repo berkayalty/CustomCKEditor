@@ -6,6 +6,7 @@ class InsertAudio extends Plugin {
   init() {
     const editor = this.editor;
     editor.ui.componentFactory.add("insertAudio", (locale) => {
+      console.log("env", window.globalApiPath);
       const buttonView = new ButtonView(locale);
       buttonView.set({
         label: "Ses Ekle",
@@ -26,7 +27,7 @@ class InsertAudio extends Plugin {
           formData.append("aciklama", audioId);
           formData.append("dosya", file);
           axios
-            .post(`${process.env.REACT_APP_API}api/file`, formData, {
+            .post(`${window.globalApiPath}api/file`, formData, {
               headers: {
                 "Content-Type": "multipart/form-data",
               },
@@ -35,9 +36,7 @@ class InsertAudio extends Plugin {
               if (fileResponse.data.status !== "ERROR") {
                 var sha1 = fileResponse.data.data.dosyaSHA1;
                 axios
-                  .get(
-                    `${process.env.REACT_APP_API}api/file/presignedURL/${sha1}`
-                  )
+                  .get(`${window.globalApiPath}api/file/presignedURL/${sha1}`)
                   .then((response) => {
                     var s3URL = response.data.data;
                     const content = `<audio controls id=${audioId} src=${s3URL} preload="none"></audio><br/>`;
