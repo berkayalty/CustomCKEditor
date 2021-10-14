@@ -32,13 +32,13 @@ import TextTransformation from "@ckeditor/ckeditor5-typing/src/texttransformatio
 import CloudServices from "@ckeditor/ckeditor5-cloud-services/src/cloudservices";
 //Added Plugins
 import InsertAudio from "./InsertAudio";
+import CustomBase64Uploader from "./CustomBase64Uploader";
 import GeneralHtmlSupport from "@ckeditor/ckeditor5-html-support/src/generalhtmlsupport";
 import Font from "@ckeditor/ckeditor5-font/src/font";
 import ImageResize from "@ckeditor/ckeditor5-image/src/imageresize";
 import TableProperties from "@ckeditor/ckeditor5-table/src/tableproperties";
 import TableCellProperties from "@ckeditor/ckeditor5-table/src/tablecellproperties";
 import PageBreak from "@ckeditor/ckeditor5-page-break/src/pagebreak";
-import Base64uploadadapter from "@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter";
 import Notification from "@ckeditor/ckeditor5-ui/src/notification/notification";
 export default class ClassicEditor extends ClassicEditorBase {}
 
@@ -67,7 +67,7 @@ ClassicEditor.builtinPlugins = [
   Table,
   TableToolbar,
   TextTransformation,
-  Base64uploadadapter,
+  CustomBase64Uploader,
   InsertAudio,
   GeneralHtmlSupport,
   Font,
