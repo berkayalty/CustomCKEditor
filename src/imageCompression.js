@@ -4,10 +4,10 @@ export default class ImageHelper {
   async resizeBase64Image(base64Image) {
     const options = {
       maxSizeMB: 0.5, // (default: Number.POSITIVE_INFINITY)
-      maxWidthOrHeight: undefined, // compress file ratio (default: undefined)
+      maxWidthOrHeight: 1280, // compress file ratio (default: undefined)
       useWebWorker: true, // optional, use multi-thread web worker, fallback to run in main-thread (default: true)
       maxIteration: 10, // optional, max number of iteration to compress the image (default: 10)
-      initialQuality: 1,
+      initialQuality: 0.5,
     };
 
     const fileImage = await imageCompression.getFilefromDataUrl(base64Image);
