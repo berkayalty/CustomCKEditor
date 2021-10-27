@@ -25,7 +25,7 @@ import FileRepository from "@ckeditor/ckeditor5-upload/src/filerepository";
  *
  * @extends module:core/plugin~Plugin
  */
-export default class Base64UploadAdapter extends Plugin {
+export default class CustomBase64Uploader extends Plugin {
   /**
    * @inheritDoc
    */
@@ -37,15 +37,18 @@ export default class Base64UploadAdapter extends Plugin {
    * @inheritDoc
    */
   static get pluginName() {
-    return "Base64UploadAdapter";
+    return "CustomBase64Uploader";
   }
 
   /**
    * @inheritDoc
    */
   init() {
-    this.editor.plugins.get(FileRepository).createUploadAdapter = (loader) =>
-      new Adapter(loader);
+    //isCrop sended from react component inside config object
+    const isCrop = this.editor.config.get("reactConfig.imageCrop");
+    this.editor.plugins.get(FileRepository).createUploadAdapter = (loader) => {
+      return new Adapter(loader, isCrop);
+    };
   }
 }
 
@@ -61,7 +64,7 @@ class Adapter {
    *
    * @param {module:upload/filerepository~FileLoader} loader
    */
-  constructor(loader) {
+  constructor(loader, isCrop) {
     /**
      * `FileLoader` instance to use during the upload.
      *
@@ -69,6 +72,7 @@ class Adapter {
      */
     this.loader = loader;
     this.imageHelper = new ImageHelper();
+    this.isCrop = isCrop;
   }
 
   /**
@@ -80,10 +84,10 @@ class Adapter {
   upload() {
     return new Promise((resolve, reject) => {
       const reader = (this.reader = new window.FileReader());
-
       reader.addEventListener("load", async () => {
         const base64Image = await this.imageHelper.resizeBase64Image(
-          reader.result
+          reader.result,
+          this.isCrop
         );
         resolve({ default: base64Image });
       });
