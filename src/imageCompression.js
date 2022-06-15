@@ -7,7 +7,7 @@ export default class ImageHelper {
       maxWidthOrHeight: isCrop ? 720 : 1280, // compress file ratio (default: undefined)
       useWebWorker: true, // optional, use multi-thread web worker, fallback to run in main-thread (default: true)
       maxIteration: 10, // optional, max number of iteration to compress the image (default: 10)
-      initialQuality: 0.5,
+      initialQuality: 0.8,
     };
     if (isCrop) {
       var image = new Image();
